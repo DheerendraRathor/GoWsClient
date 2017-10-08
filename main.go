@@ -50,6 +50,23 @@ func main() {
 		log.Fatalf("Unable to dial ws connection to agent %s with error %s\n", address, err)
 	}
 
+	respSubProtocol := conn.Subprotocol()
+	subProtocolMatch := false
+	if len(dialer.Subprotocols) > 0 {
+		for _, val := range dialer.Subprotocols {
+			if val == respSubProtocol {
+				subProtocolMatch = true
+				break
+			}
+		}
+	} else {
+		subProtocolMatch = respSubProtocol == ""
+	}
+
+	if !subProtocolMatch {
+		log.Fatalf("Subprotocol match failed. Server returned subprotocol: '%s'\n", respSubProtocol)
+	}
+
 	log.Println("Connection stabilized")
 	defer conn.Close()
 
