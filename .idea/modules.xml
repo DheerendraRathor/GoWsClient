@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/GoWsClient.iml" filepath="$PROJECT_DIR$/.idea/GoWsClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/SimpleWsClient.iml" filepath="$PROJECT_DIR$/.idea/SimpleWsClient.iml" />
     </modules>
   </component>
 </project>
