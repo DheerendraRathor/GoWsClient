@@ -97,7 +97,7 @@ func main() {
 		},
 	)
 
-	var wg sync.WaitGroup
+	var writerWg sync.WaitGroup
 
 	for {
 		msgType, rawMsg, err := conn.ReadMessage()
@@ -115,9 +115,9 @@ func main() {
 			log.Printf("Received unknown message type: %d.\n Base64 of message: %s\n", msgType, base64.StdEncoding.EncodeToString(rawMsg))
 		}
 
-		wg.Add(1)
+		writerWg.Add(1)
 		go func() {
-			defer wg.Done()
+			defer writerWg.Done()
 			time.Sleep(time.Duration(time.Second * time.Duration(echoDelay)))
 
 			err = conn.WriteMessage(msgType, rawMsg)
@@ -129,7 +129,7 @@ func main() {
 		}()
 	}
 
-	wg.Wait()
+	writerWg.Wait()
 
 	log.Println("Exiting...")
 }
